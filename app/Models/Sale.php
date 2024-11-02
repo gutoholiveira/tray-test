@@ -10,11 +10,11 @@ class Sale extends Model
 {
     use HasFactory;
 
-    const ID        = 'id';
-    const SELLER_ID = 'seller_id';
-    const VALUE     = 'value';
-    const COMISSION = 'comission';
-    const DATE      = 'date';
+    const ID         = 'id';
+    const SELLER_ID  = 'seller_id';
+    const VALUE      = 'value';
+    const COMMISSION = 'commission';
+    const DATE       = 'date';
 
     /**
      * The table's name.
@@ -31,7 +31,7 @@ class Sale extends Model
     protected $fillable = [
         self::SELLER_ID,
         self::VALUE,
-        self::COMISSION,
+        self::COMMISSION,
         self::DATE,
     ];
 

@@ -63,7 +63,7 @@ class SellerService implements ISellerService
         Mail::to($seller->email)->send(new DailyReport($seller->name, [
             'sales_count' => $sales->count(),
             'sales_value' => $sales->sum(Sale::VALUE),
-            'comission'   => $sales->sum(Sale::COMISSION),
+            'commission'  => $sales->sum(Sale::COMMISSION),
             'date'        => date("d-m-Y"),
         ]));
     }

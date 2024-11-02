@@ -25,10 +25,10 @@ class SaleFactory extends Factory
         $valor = fake()->numberBetween(100, 5000);
         
         return [
-            Sale::SELLER_ID => fake()->numberBetween(1, 5),
-            Sale::VALUE     => $valor,
-            Sale::COMISSION => $valor * 0.085,
-            Sale::DATE      => fake()->date(),
+            Sale::SELLER_ID  => fake()->numberBetween(1, 5),
+            Sale::VALUE      => $valor,
+            Sale::COMMISSION => $valor * 0.085,
+            Sale::DATE       => fake()->date(),
         ];
     }
 }

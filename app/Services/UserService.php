@@ -30,14 +30,14 @@ class UserService implements IUserService
             $sellers_sales[$key]['sales'] = [
                 'sales_count' => $seller_sales->count(),
                 'sales_value' => $seller_sales->sum(Sale::VALUE),
-                'comission'   => $seller_sales->sum(Sale::COMISSION),
+                'commission'  => $seller_sales->sum(Sale::COMMISSION),
             ];
         }
 
         Mail::to($user->email)->send(new DailyReport($user->name, [
             'sales_count' => $sales->count(),
             'sales_value' => $sales->sum(Sale::VALUE),
-            'comission'   => $sales->sum(Sale::COMISSION),
+            'commission'  => $sales->sum(Sale::COMMISSION),
             'date'        => date("d-m-Y"),
             'sellers'     => $sellers_sales,
         ]));

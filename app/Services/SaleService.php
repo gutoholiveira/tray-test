@@ -22,10 +22,10 @@ class SaleService implements ISaleService
     {
         try {
             $sale = Sale::create([
-                Sale::SELLER_ID => $request[Sale::SELLER_ID],
-                Sale::VALUE     => $request[Sale::VALUE],
-                Sale::COMISSION => $request[Sale::VALUE] * 0.085,
-                Sale::DATE      => $request[Sale::DATE],
+                Sale::SELLER_ID  => $request[Sale::SELLER_ID],
+                Sale::VALUE      => $request[Sale::VALUE],
+                Sale::COMMISSION => $request[Sale::VALUE] * 0.085,
+                Sale::DATE       => $request[Sale::DATE],
             ]);
 
             $sale->seller = $sale->seller;
@@ -40,10 +40,10 @@ class SaleService implements ISaleService
     {
         try {
             $sale->update([
-                Sale::SELLER_ID => $request[Sale::SELLER_ID],
-                Sale::VALUE     => $request[Sale::VALUE],
-                Sale::COMISSION => $request[Sale::VALUE] * 0.085,
-                Sale::DATE      => $request[Sale::DATE],
+                Sale::SELLER_ID  => $request[Sale::SELLER_ID],
+                Sale::VALUE      => $request[Sale::VALUE],
+                Sale::COMMISSION => $request[Sale::VALUE] * 0.085,
+                Sale::DATE       => $request[Sale::DATE],
             ]);
 
             $sale         = $sale->refresh();
