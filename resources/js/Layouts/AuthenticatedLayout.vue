@@ -40,16 +40,16 @@ const showingNavigationDropdown = ref(false);
                                     Dashboard
                                 </NavLink>
                                 <NavLink
-                                    :href="route('vendedores')"
-                                    :active="route().current('vendedores')"
+                                    :href="route('sellers')"
+                                    :active="route().current('sellers')"
                                 >
-                                    Vendedores
+                                    Sellers
                                 </NavLink>
                                 <NavLink
-                                    :href="route('vendas')"
-                                    :active="route().current('vendas')"
+                                    :href="route('sales')"
+                                    :active="route().current('sales')"
                                 >
-                                    Vendas
+                                    Sales
                                 </NavLink>
                             </div>
                         </div>
@@ -159,16 +159,16 @@ const showingNavigationDropdown = ref(false);
                             Dashboard
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
-                            :href="route('vendedores')"
-                            :active="route().current('vendedores')"
+                            :href="route('sellers')"
+                            :active="route().current('sellers')"
                         >
-                            Vendedores
+                            Sellers
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
-                            :href="route('vendas')"
-                            :active="route().current('vendas')"
+                            :href="route('sales')"
+                            :active="route().current('sales')"
                         >
-                            Vendas
+                            Sales
                         </ResponsiveNavLink>
                     </div>
 
