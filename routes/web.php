@@ -19,11 +19,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/sellers', function () {
-    return Inertia::render('Sellers/Index');
+    return Inertia::render('Seller/Index');
 })->middleware(['auth', 'verified'])->name('sellers');
 
 Route::get('/sales', function () {
-    return Inertia::render('Sales/Index');
+    return Inertia::render('Sale/Index');
 })->middleware(['auth', 'verified'])->name('sales');
 
 Route::middleware('auth')->group(function () {
