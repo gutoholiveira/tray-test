@@ -1,66 +1,110 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# General information
+The app was developed using WSL (Windows Subsystem for Linux) 
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### Login and register
+To access the application, you can login by the route: `http://localhost:85/login` with: <br>
+email:`tray@test.com` <br>
+password:`password`
 
-## About Laravel
+You also can register a new user by the registration route: `http://localhost:85/register`.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Menus
+Route to access seller management: `http://localhost:85/sellers`<br>
+Route to access sales management: `http://localhost:85/sales`
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+### Sales Report Routine
+To work with the routine of sending sales report, you must configure the following `MAIL` settings on `.env` file, according your data. <br>
+`MAIL_MAILER`, `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD`, `MAIL_ENCRYPTION`, `MAIL_FROM_ADDRESS`, `MAIL_FROM_NAME`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+The app sends 2 different reports:
+1. To users, as an admin report, with the total data for the day and also segmented by each seller.
+2. To seller, with his/her daily sales data.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+To receive an admin report, you need a `User` registration with a valid email. <br>
+To receive a seller report, you need a `Seller` registration with a valid email.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+By default, the report routine is defined to run every day at 8PM. But you can change the recurrence on `route.console` file.
 
-## Laravel Sponsors
+_**Important**_ <br>
+To receive the reports by the routine, you need the Laravel Schedule working (Additional Command 2)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# Installation
 
-### Premium Partners
+1. Clone the Repository
+    ```bash
+    git clone https://github.com/gutoholiveira/tray-test.git
+    ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+2. Access the project folder
+     ```bash
+    cd tray-test
+    ```
 
-## Contributing
+3. Create the `.env` file <br>
+    Copy `.env.example` to `.env` and configure the environment variables.
+   ```bash
+   cp .env.example .env
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. Install the project dependencies with composer
+    ```bash 
+    composer install
+    ```
 
-## Code of Conduct
+5. Run the application containers
+    ```bash
+    ./vendor/bin/sail up -d
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+6. Generate the project key
+    ```bash
+    ./vendor/bin/sail artisan key:generate
+    ```
 
-## Security Vulnerabilities
+7. Create the database tables and create data
+    ```bash
+    ./vendor/bin/sail artisan migrate --seed
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+8. Install the project dependencies with npm
+    ```bash
+    ./vendor/bin/sail npm install
+    ```
+9. Build the application
+    ```bash
+    ./vendor/bin/sail npm run build
+    ```
 
-## License
+10. Run front-end development build
+    ```bash
+    ./vendor/bin/sail npm run dev
+    ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Running the Application
+1. Start the Dcoke containers
+    ```bash
+    ./vendor/bin/sail up -d
+    ```
+
+2. Run the front-end development build 
+    ```bash
+    ./vendor/bin/sail npm run dev
+    ```
+
+## Additional Commands
+1. Run Tests
+   ```bash
+   ./vendor/bin/sail artisan test
+   ```
+
+2. Start Schedule
+   ```bash
+   ./vendor/bin/sail artisan schedule:work
+   ```
+
+3. Stop Containers
+   ```bash
+   ./vendor/bin/sail down
+   ```
