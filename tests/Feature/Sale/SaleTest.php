@@ -26,6 +26,7 @@ class SaleTest extends TestCase
     public function test_get_sales_list(): void
     {
         $user = User::factory()->create();
+        
         Seller::factory(5)->create();
         Sale::factory(30)->create();
 
@@ -46,12 +47,13 @@ class SaleTest extends TestCase
     {
         $user   = User::factory()->create();
         $seller = Seller::factory()->create();
+        $value  = 54.28;
 
         $response = $this
             ->actingAs($user)
             ->post('api/v1/sales', [
                 Sale::SELLER_ID => $seller->id,
-                Sale::VALUE     => 125000,
+                Sale::VALUE     => $value,
                 Sale::DATE      => date('Y-m-d'),
             ]);
 
@@ -61,8 +63,8 @@ class SaleTest extends TestCase
         $sale = Sale::latest()->first();
 
         $this->assertSame($sale->seller_id, $seller->id);
-        $this->assertSame($sale->value, 125000);
-        $this->assertSame($sale->commission, intval($sale->value * 0.085));
+        $this->assertSame($sale->value, intval($value * 100));
+        $this->assertSame($sale->commission, intval(($value * 100) * 0.085));
     }
 
     public function test_get_sale_row(): void
@@ -82,8 +84,8 @@ class SaleTest extends TestCase
                     'sale' => [
                         Sale::ID         => $sale->id,
                         Sale::SELLER_ID  => $sale->seller_id,
-                        Sale::VALUE      => $sale->value,
-                        Sale::COMMISSION => intval($sale->commission),
+                        Sale::VALUE      => $sale->value / 100,
+                        Sale::COMMISSION => number_format(($sale->commission / 100), 2, '.', ','),
                         Sale::DATE       => $sale->date,
                     ]
                 ]
@@ -92,15 +94,16 @@ class SaleTest extends TestCase
 
     public function test_sale_can_be_updated(): void
     {
-        $user     = User::factory()->create();
+        $user   = User::factory()->create();
         $seller = Seller::factory()->create();
-        $sale    = Sale::factory()->create([Sale::SELLER_ID => $seller->id]);
+        $sale   = Sale::factory()->create([Sale::SELLER_ID => $seller->id]);
+        $value  = 54.28;
 
         $response = $this
             ->actingAs($user)
             ->put('api/v1/sales/' . $sale->id, [
                 Sale::SELLER_ID => $seller->id,
-                Sale::VALUE     => 500000,
+                Sale::VALUE     => $value,
                 Sale::DATE      => date('Y-m-d'),
             ]);
 
@@ -109,8 +112,8 @@ class SaleTest extends TestCase
 
         $sale->refresh();
 
-        $this->assertSame(500000, $sale->value);
-        $this->assertSame(intval(500000 * 0.085), $sale->commission);
+        $this->assertSame($sale->value, intval($value * 100));
+        $this->assertSame($sale->commission, intval(($value * 100) * 0.085));
     }
 
     public function test_sale_can_be_deleted(): void
