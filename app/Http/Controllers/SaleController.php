@@ -94,6 +94,6 @@ class SaleController extends Controller
     {
         $sales = $this->sale_service->getBySeller($seller);
 
-        return response()->json(['message' => 'success', 'data' => ['sales' => $sales]], Response::HTTP_OK);
+        return response()->json(['message' => 'success', 'data' => ['sales' => SaleResource::collection($sales)]], Response::HTTP_OK);
     }
 }
