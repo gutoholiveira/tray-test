@@ -26,7 +26,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             Sale::SELLER_ID => ['required', 'integer'],
-            Sale::VALUE     => ['required', 'integer'],
+            Sale::VALUE     => ['required'],
             Sale::DATE      => ['required', 'date'],
         ];
     }
@@ -44,7 +44,7 @@ class UpdateRequest extends FormRequest
 
         $this->merge([
             Sale::SELLER_ID => $seller_id,
-            Sale::VALUE     => $value,
+            Sale::VALUE     => $value * 100,
             Sale::DATE      => $date[0],
         ]);
     }
