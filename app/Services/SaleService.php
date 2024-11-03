@@ -21,16 +21,12 @@ class SaleService implements ISaleService
     public function store(StoreRequest $request): Sale
     {
         try {
-            $sale = Sale::create([
+            return Sale::create([
                 Sale::SELLER_ID  => $request[Sale::SELLER_ID],
                 Sale::VALUE      => $request[Sale::VALUE],
                 Sale::COMMISSION => $request[Sale::VALUE] * 0.085,
                 Sale::DATE       => $request[Sale::DATE],
             ]);
-
-            $sale->seller = $sale->seller;
-
-            return $sale;
         } catch (Exception $e) {
             throw new Exception('Error on create sale!');
         }
@@ -46,10 +42,7 @@ class SaleService implements ISaleService
                 Sale::DATE       => $request[Sale::DATE],
             ]);
 
-            $sale         = $sale->refresh();
-            $sale->seller = $sale->seller;
-
-            return $sale;
+            return $sale->refresh();
         } catch (Exception $e) {
             throw new Exception('Error on update sale!');
         }
