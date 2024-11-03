@@ -1,7 +1,7 @@
 # General information
 The app was developed using WSL (Windows Subsystem for Linux) 
 
-### Login and register
+### Login and Register
 To access the application, you can login by the route: `http://localhost:85/login` with: <br>
 email:`tray@test.com` <br>
 password:`password`
@@ -28,7 +28,7 @@ To receive a seller report, you need a `Seller` registration with a valid email.
 By default, the report routine is defined to run every day at 8PM. But you can change the recurrence on `route.console` file.
 
 _**Important**_ <br>
-To receive the reports by the routine, you need the Laravel Schedule working (Additional Command 2)
+To receive the reports by the routine, you need the Schedule working (Additional Command 2)
 
 # Installation
 
@@ -83,7 +83,7 @@ To receive the reports by the routine, you need the Laravel Schedule working (Ad
     ```
 
 ## Running the Application
-1. Start the Dcoke containers
+1. Start the Docker containers
     ```bash
     ./vendor/bin/sail up -d
     ```
