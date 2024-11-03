@@ -56,7 +56,7 @@ class SellerService implements ISellerService
 
     public function sendMail(Seller $seller): void
     {
-        $sales = $seller->vendas()
+        $sales = $seller->sales()
             ->where(Sale::DATE, date('Y-m-d'))
             ->get();
 

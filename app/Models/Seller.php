@@ -34,7 +34,7 @@ class Seller extends Model
     /**
      * Get the Seller sales.
      */
-    public function vendas(): HasMany
+    public function sales(): HasMany
     {
         return $this->hasMany(Sale::class);
     }
