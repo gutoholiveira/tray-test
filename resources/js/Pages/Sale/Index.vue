@@ -1,7 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import axios from 'axios';
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
@@ -15,7 +15,7 @@ import DatePicker from 'primevue/datepicker';
 
 const confirm = useConfirm();
 
-const selectedSale = ref({ name: '', email: '' });
+const selectedSale = ref({ seller_id: '', value: '', date: '' });
 const sales = ref([]);
 const sale = ref([]);
 const sellers = ref([]);
@@ -115,6 +115,13 @@ function deleteSale(id) {
         }
     });
 }
+
+// Clean the form inputs
+watch(visible, (newValue) => {
+    if (!newValue) {
+        selectedSale.value = { seller_id: '', value: '', date: '' };
+    }
+});
 
 onMounted(() => {
     getSales();

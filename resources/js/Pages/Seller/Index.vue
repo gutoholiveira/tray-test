@@ -1,7 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import axios from 'axios';
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
@@ -102,6 +102,13 @@ function sendDailyReport(id) {
             alert(error.response.data.message);
         });
 }
+
+// Clean the form inputs
+watch(visible, (newValue) => {
+    if (!newValue) {
+        selectedSeller.value = { name: '', email: '' };
+    }
+});
 
 onMounted(() => {
     getSellers();
