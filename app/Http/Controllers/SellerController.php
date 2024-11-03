@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Seller\StoreRequest;
 use App\Http\Requests\Seller\UpdateRequest;
+use App\Http\Resources\Seller\SellerResource;
 use App\Models\Seller;
 use App\Services\SellerService;
 use Illuminate\Http\JsonResponse;
@@ -28,7 +29,7 @@ class SellerController extends Controller
     {
         $sellers = $this->seller_service->getAll();
 
-        return response()->json(['message' => 'success', 'data' => ['sellers' => $sellers]], Response::HTTP_OK);
+        return response()->json(['message' => 'success', 'data' => ['sellers' => SellerResource::collection($sellers)]], Response::HTTP_OK);
     }
 
     /**
@@ -41,7 +42,7 @@ class SellerController extends Controller
     {
         $seller = $this->seller_service->store($request);
 
-        return response()->json(['message' => 'success', 'data' => ['seller' => $seller]], Response::HTTP_CREATED);
+        return response()->json(['message' => 'success', 'data' => ['seller' => new SellerResource($seller)]], Response::HTTP_CREATED);
     }
 
     /**
@@ -52,7 +53,7 @@ class SellerController extends Controller
      */
     public function show(Seller $seller): JsonResponse
     {
-        return response()->json(['message' => 'success', 'data' => ['seller' => $seller]], Response::HTTP_OK);
+        return response()->json(['message' => 'success', 'data' => ['seller' => new SellerResource($seller)]], Response::HTTP_OK);
     }
 
     /**
@@ -66,7 +67,7 @@ class SellerController extends Controller
     {
         $updated_seller = $this->seller_service->update($seller, $request);
 
-        return response()->json(['message' => 'success', 'data' => ['seller' => $updated_seller]], Response::HTTP_OK);
+        return response()->json(['message' => 'success', 'data' => ['seller' => new SellerResource($updated_seller)]], Response::HTTP_OK);
     }
 
     /**

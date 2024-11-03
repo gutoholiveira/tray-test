@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sale\StoreRequest;
 use App\Http\Requests\Sale\UpdateRequest;
+use App\Http\Resources\Sale\SaleResource;
 use App\Models\Sale;
 use App\Models\Seller;
 use App\Services\SaleService;
@@ -29,7 +30,7 @@ class SaleController extends Controller
     {
         $sales = $this->sale_service->getAll();
 
-        return response()->json(['message' => 'success', 'data' => ['sales' => $sales]], Response::HTTP_OK);
+        return response()->json(['message' => 'success', 'data' => ['sales' => SaleResource::collection($sales)]], Response::HTTP_OK);
     }
 
     /**
@@ -42,7 +43,7 @@ class SaleController extends Controller
     {
         $sale = $this->sale_service->store($request);
 
-        return response()->json(['message' => 'success', 'data' => ['sale' => $sale]], Response::HTTP_CREATED);
+        return response()->json(['message' => 'success', 'data' => ['sale' => new SaleResource($sale)]], Response::HTTP_CREATED);
     }
 
     /**
@@ -53,7 +54,7 @@ class SaleController extends Controller
      */
     public function show(Sale $sale): JsonResponse
     {
-        return response()->json(['message' => 'success', 'data' => ['sale' => $sale]], Response::HTTP_OK);
+        return response()->json(['message' => 'success', 'data' => ['sale' => new SaleResource($sale)]], Response::HTTP_OK);
     }
 
     /**
@@ -67,7 +68,7 @@ class SaleController extends Controller
     {
         $updated_sale = $this->sale_service->update($sale, $request);
 
-        return response()->json(['message' => 'success', 'data' => ['sale' => $updated_sale]], Response::HTTP_OK);
+        return response()->json(['message' => 'success', 'data' => ['sale' => new SaleResource($updated_sale)]], Response::HTTP_OK);
     }
 
     /**
