@@ -161,12 +161,12 @@ onMounted(() => {
                             </Column>
                             <Column field="value" header="Value">
                                 <template #body="slotProps">
-                                    R${{ slotProps.data.value }}
+                                    R${{ slotProps.data.value.toFixed(2) }}
                                 </template>
                             </Column>
                             <Column field="commission" header="Commission">
                                 <template #body="slotProps">
-                                    R${{ slotProps.data.commission }}
+                                    R${{ slotProps.data.commission.toFixed(2) }}
                                 </template>
                             </Column>
                             <Column field="date" header="Date" />
