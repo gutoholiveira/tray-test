@@ -7,7 +7,7 @@ import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Button from "primevue/button";
 import Dialog from 'primevue/dialog';
-import InputText from "primevue/inputtext";
+import InputNumber from 'primevue/inputnumber';
 import { useConfirm } from "primevue/useconfirm";
 import ConfirmDialog from 'primevue/confirmdialog';
 import Dropdown from "primevue/dropdown";
@@ -161,12 +161,12 @@ onMounted(() => {
                             </Column>
                             <Column field="value" header="Value">
                                 <template #body="slotProps">
-                                    R${{ (slotProps.data.value / 100).toFixed(2) }}
+                                    R${{ slotProps.data.value }}
                                 </template>
                             </Column>
                             <Column field="commission" header="Commission">
                                 <template #body="slotProps">
-                                    R${{ (slotProps.data.commission / 100).toFixed(2) }}
+                                    R${{ slotProps.data.commission }}
                                 </template>
                             </Column>
                             <Column field="date" header="Date" />
@@ -194,7 +194,7 @@ onMounted(() => {
             </div>
             <div class="flex items-center gap-4 mb-8">
                 <label for="value" class="font-semibold w-24">Value (cents)</label>
-                <InputText v-model="selectedSale.value" id="value" class="flex-auto" autocomplete="off" />
+                <InputNumber v-model="selectedSale.value" id="value" class="flex-auto" mode="decimal" :minFractionDigits="2" />
             </div>
             <div class="flex items-center gap-4 mb-8">
                 <label for="date" class="font-semibold w-24">Date</label>
@@ -208,13 +208,13 @@ onMounted(() => {
 
         <Dialog v-model:visible="showData" modal header="Sale info" :style="{ width: '40rem' }">
             <div class="flex items-center gap-4 mb-4">
-                <p class="font-semibold">Seller: {{ sale.seller_id }}</p>
+                <p class="font-semibold">Seller: {{ sale.seller.name }}</p>
             </div>
             <div class="flex items-center gap-4 mb-8">
-                <label class="font-semibold">Value: R${{ (sale.value / 100) }}</label>
+                <label class="font-semibold">Value: R${{ sale.value }}</label>
             </div>
             <div class="flex items-center gap-4 mb-8">
-                <label class="font-semibold">Commission: R${{ (sale.commission) / 100 }}</label>
+                <label class="font-semibold">Commission: R${{ sale.commission }}</label>
             </div>
             <div class="flex items-center gap-4 mb-8">
                 <label class="font-semibold">Date: {{ sale.date }}</label>
